@@ -23,7 +23,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-ROOT = Path(__file__).resolve().parents[1]
+# Save artifacts inside the repository directory (parent of this file)
+ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data" / "loan_default_nigeria_synthetic.csv"
 MODEL_DIR = ROOT / "model"
 
@@ -131,7 +132,8 @@ def main():
         "default_rate": float(y.mean()),
     }
 
-    MODEL_DIR.mkdir(exist_ok=True)
+    # Ensure model directory is created inside the repo
+    MODEL_DIR.mkdir(parents=True, exist_ok=True)
     joblib.dump(selected, MODEL_DIR / "loan_default_pipeline.joblib")
 
     metadata = {

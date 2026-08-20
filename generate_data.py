@@ -4,7 +4,7 @@ import pandas as pd
 
 SEED = 42
 N = 6000
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "data" / "loan_default_nigeria_synthetic.csv"
 
 

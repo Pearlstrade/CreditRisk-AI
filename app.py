@@ -6,11 +6,32 @@ import pandas as pd
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parent
+# Prefer model/ but fall back to root-level artifacts (repository contains copies at root)
 MODEL_PATH = ROOT / "model" / "loan_default_pipeline.joblib"
+ALT_MODEL_PATH = ROOT / "loan_default_pipeline.joblib"
 META_PATH = ROOT / "model" / "model_metadata.json"
+ALT_META_PATH = ROOT / "model_metadata.json"
 METRICS_PATH = ROOT / "model" / "metrics.json"
+ALT_METRICS_PATH = ROOT / "metrics.json"
 FI_PATH = ROOT / "model" / "feature_importance.csv"
+ALT_FI_PATH = ROOT / "feature_importance.csv"
 DATA_PATH = ROOT / "data" / "loan_default_nigeria_synthetic.csv"
+
+# Resolve which paths exist (support both layout styles)
+if MODEL_PATH.exists():
+    _MODEL_PATH = MODEL_PATH
+    _META_PATH = META_PATH
+    _METRICS_PATH = METRICS_PATH
+    _FI_PATH = FI_PATH
+elif ALT_MODEL_PATH.exists():
+    _MODEL_PATH = ALT_MODEL_PATH
+    _META_PATH = ALT_META_PATH
+    _METRICS_PATH = ALT_METRICS_PATH
+    _FI_PATH = ALT_FI_PATH
+else:
+    # Keep the older, clearer instruction for users who run the scripts from repo root
+    st.error("Model artifact not found. Run: python generate_data.py && python train.py")
+    st.stop()
 
 st.set_page_config(
     page_title="AI-04 Loan Default Risk Predictor",
@@ -21,14 +42,10 @@ st.set_page_config(
 st.title("💳 AI-04 — Loan Default Risk Predictor")
 st.caption("Educational Nigerian micro-lending risk-scoring MVP")
 
-if not MODEL_PATH.exists():
-    st.error("Model artifact not found. Run: python src/generate_data.py && python src/train.py")
-    st.stop()
-
-model = joblib.load(MODEL_PATH)
-metadata = json.loads(META_PATH.read_text())
-metrics = json.loads(METRICS_PATH.read_text())
-feature_importance = pd.read_csv(FI_PATH)
+model = joblib.load(_MODEL_PATH)
+metadata = json.loads(_META_PATH.read_text())
+metrics = json.loads(_METRICS_PATH.read_text())
+feature_importance = pd.read_csv(_FI_PATH)
 
 st.warning(
     "This is an educational decision-support prototype using synthetic data. "
@@ -165,8 +182,8 @@ with tab3:
     e3.metric("Precision", f"{metrics['test_precision']:.3f}")
     e4.metric("Recall", f"{metrics['test_recall']:.3f}")
 
-    cm_path = ROOT / "model" / "confusion_matrix.png"
-    roc_path = ROOT / "model" / "roc_curve.png"
+    cm_path = (ROOT / "model" / "confusion_matrix.png") if (ROOT / "model" / "confusion_matrix.png").exists() else (ROOT / "confusion_matrix.png")
+    roc_path = (ROOT / "model" / "roc_curve.png") if (ROOT / "model" / "roc_curve.png").exists() else (ROOT / "roc_curve.png")
     a, b = st.columns(2)
     with a:
         st.image(str(cm_path), caption="Held-out test confusion matrix")

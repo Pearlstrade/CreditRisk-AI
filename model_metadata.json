@@ -1,0 +1,45 @@
+{
+  "numeric_features": [
+    "age",
+    "monthly_income_ngn",
+    "loan_amount_ngn",
+    "loan_term_months",
+    "previous_loans",
+    "previous_defaults",
+    "repayment_history_score",
+    "savings_balance_ngn",
+    "business_age_months",
+    "daily_sales_ngn",
+    "debt_to_income_ratio"
+  ],
+  "categorical_features": [
+    "gender",
+    "employment_type",
+    "collateral_available",
+    "region"
+  ],
+  "all_features": [
+    "age",
+    "monthly_income_ngn",
+    "loan_amount_ngn",
+    "loan_term_months",
+    "previous_loans",
+    "previous_defaults",
+    "repayment_history_score",
+    "savings_balance_ngn",
+    "business_age_months",
+    "daily_sales_ngn",
+    "debt_to_income_ratio",
+    "gender",
+    "employment_type",
+    "collateral_available",
+    "region"
+  ],
+  "risk_bands": {
+    "low": "< 30",
+    "medium": "30-60",
+    "high": "> 60"
+  },
+  "selected_model": "logistic_regression",
+  "decision_threshold": 0.62
+}

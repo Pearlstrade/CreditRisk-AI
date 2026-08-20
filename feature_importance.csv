@@ -1,0 +1,27 @@
+feature,importance
+num__previous_defaults,0.7310157974119529
+num__debt_to_income_ratio,0.4709977268224837
+cat__employment_type_Unemployed,0.33356520566367587
+cat__region_North East,0.3186200091170275
+cat__collateral_available_Yes,0.2868958410009313
+cat__employment_type_Trader,0.2787501511745922
+num__repayment_history_score,0.2564328804702877
+cat__employment_type_Salaried,0.24079421967352013
+cat__employment_type_Casual,0.23185773914493243
+num__loan_term_months,0.19202314892704922
+cat__region_South West,0.18781433525184013
+cat__employment_type_Self-employed,0.18553151232860557
+cat__collateral_available_No,0.14724290263282086
+cat__region_North Central,0.14642984075879842
+cat__gender_Female,0.11117804187481811
+num__monthly_income_ngn,0.09950689004839228
+cat__region_North West,0.09943027829177266
+num__previous_loans,0.060652787895232006
+num__loan_amount_ngn,0.05214064997450763
+cat__region_South East,0.04222195971359212
+num__daily_sales_ngn,0.0322231352148127
+cat__gender_Male,0.028474896493291088
+num__savings_balance_ngn,0.02470041221180536
+num__business_age_months,0.015200837043949022
+cat__region_South South,0.013624867256356211
+num__age,0.003491274483764721
